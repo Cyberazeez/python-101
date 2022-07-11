@@ -3,28 +3,45 @@ def greet():
                                              *** Hello This is a Phone Book Application ***
                         
 The Way This Application Works Is That It Lookup Info.
+Please Note That Capitalization Is Important!
     """
     print(gr)
 
 
 def search_meth():
-    g = input('Please Enter the Search Method: Phone# or Name?')
+    g = input('Please Enter the Search Method: Phone# or Name? ')
     while g == 'Name' or 'Phone#':
         if g == 'Phone#':
             search_ph()
+            break
         elif g == 'Name':
             search_na()
+            break
+        elif g != 'Name' or 'Phone#':
+            print('Sorry That Is incorrect Input')
+            search_meth()
             break
 
 
 
+
 def search_ph():
+    input_search = 'str'
     i = 0
-    x = int(input('Please Enter The Phone#: '))
+    while not input_search.isdigit():
+        input_search = input('Please Enter The Phone#: ')
+        if not input_search.isdigit():
+            input_search = input('Wrong Data Type, Please Enter a Phone Number: ')
+        else:
+            return int(input_search)
+
     while i <= 6:
-        if x == phb[i]['Pn#']:
-            print(phb[i]['name'])
+        if int(input_search) == phb[i]['Pn#']:
+            print('This Number Belongs TO :"' + phb[i]['name'] + '"')
+            break
         i += 1
+    if i == 7:
+        print('Sorry, The Number Is Not Found')
 
 
 def search_na():
@@ -33,7 +50,31 @@ def search_na():
     while i <= 6:
         if x == phb[i]['name']:
             print(phb[i]['Pn#'])
+            break
         i += 1
+    if i == 7:
+        print('Sorry, The Name Is Not Found')
+
+
+def again():
+    agg = input(print("""
+If You Want to Search Again Please Type 'Yes' 
+If Not Please Type 'Leave'
+"""))
+    while agg == 'Yes' or 'Leave':
+        if agg == 'Yes':
+            print('Ok')
+            search_meth()
+            again()
+            break
+        elif agg == 'Leave':
+            print('Goodbye')
+            quit()
+            break
+        elif agg != 'Yes' or 'Leave':
+            print('Sorry That Is incorrect Input')
+            again()
+            break
 
 
 phb = [
@@ -50,3 +91,4 @@ phb = [
 
 greet()
 search_meth()
+again()
