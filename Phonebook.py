@@ -1,11 +1,28 @@
-def greet():
-    gr = """
+gr = """
                                              *** Hello This is a Phone Book Application ***
-                        
+
 The Way This Application Works Is That It Lookup Info.
 Please Note That Capitalization Is Important!
     """
-    print(gr)
+print(gr)
+
+
+def greet():
+    start = input("""
+    Search in The Phonebook Enter 'Search'
+    Add New Member Info. Enter 'Add'
+        """)
+    while start == 'Search' or 'Add':
+        if start == 'Add':
+            add()
+            break
+        elif start == 'Search':
+            search_meth()
+            break
+        else:
+            print('Sorry That Is incorrect Input')
+            greet()
+            break
 
 
 def search_meth():
@@ -23,48 +40,58 @@ def search_meth():
             break
 
 
-
-
 def search_ph():
-    input_search = 'str'
+    input_search = input('Please Enter a Phone#: ')
     i = 0
-    while not input_search.isdigit():
-        input_search = input('Please Enter The Phone#: ')
-        if not input_search.isdigit():
-            input_search = input('Wrong Data Type, Please Enter a Phone Number: ')
-        else:
-            return int(input_search)
-
+    while not input_search.isdigit() or len(input_search) != 10:
+        input_search = input('This Is Invalid Number, Please Enter a Correct Phone Number: ')
+        if input_search.isdigit():
+            continue
+        elif len(input_search) == 10:
+            break
     while i <= 6:
         if int(input_search) == phb[i]['Pn#']:
             print('This Number Belongs TO :"' + phb[i]['name'] + '"')
             break
         i += 1
-    if i == 7:
+    if i == len(phb):
         print('Sorry, The Number Is Not Found')
 
 
 def search_na():
     i = 0
     x = str(input('Please Enter a Name: '))
-    while i <= 6:
+    while i <= len(phb):
         if x == phb[i]['name']:
             print(phb[i]['Pn#'])
             break
         i += 1
-    if i == 7:
+    if i == len(phb):
         print('Sorry, The Name Is Not Found')
 
 
+def add():
+    new_name = input('Please Enter The Name: ')
+    new_phone = input('Please Enter Thw Phone# :')
+    while not new_phone.isdigit() or len(new_phone) != 10:
+        new_phone = input('This Is Invalid Number, Please Enter a Correct Phone Number: ')
+        if new_phone.isdigit():
+            continue
+        elif len(new_phone) == 10:
+            break
+    new_dic = {'name': new_name, 'Pn#': new_phone}
+    phb.append(new_dic)
+
+
 def again():
-    agg = input(print("""
-If You Want to Search Again Please Type 'Yes' 
+    agg = input("""
+If You Want To Search Again Please Type 'Yes' 
 If Not Please Type 'Leave'
-"""))
+""")
     while agg == 'Yes' or 'Leave':
         if agg == 'Yes':
             print('Ok')
-            search_meth()
+            greet()
             again()
             break
         elif agg == 'Leave':
@@ -90,5 +117,4 @@ phb = [
 ]
 
 greet()
-search_meth()
 again()
