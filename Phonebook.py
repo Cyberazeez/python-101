@@ -49,7 +49,7 @@ def search_ph():
             continue
         elif len(input_search) == 10:
             break
-    while i <= 6:
+    while i <= len(phb):
         if int(input_search) == phb[i]['Pn#']:
             print('This Number Belongs TO :"' + phb[i]['name'] + '"')
             break
@@ -112,7 +112,8 @@ phb = [
     {'name': 'Abdullah', 'Pn#': 4444444444},
     {'name': 'Rawan', 'Pn#': 5555555555},
     {'name': 'Faisal', 'Pn#': 6666666666},
-    {'name': 'Layla', 'Pn#': 7777777777}
+    {'name': 'Layla', 'Pn#': 7777777777},
+    {'name': 'Saad', 'Pn#': 8888888888}
 
 ]
 
